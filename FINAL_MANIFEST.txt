@@ -1,0 +1,7 @@
+ARCHON SESSION LABS — DEPLOYABLE FINAL
+frontend/  Next.js
+backend/   FastAPI + Redis
+nginx/     reverse proxy
+deploy/    Supervisor config
+docker-compose.yml  container deployment
+deploy.sh            startup script
