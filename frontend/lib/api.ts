@@ -1,4 +1,4 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000/api";
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "/api";
 
 export type SessionType = "pyrogram" | "telethon";
 
@@ -13,9 +13,11 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   });
 
   const data = await response.json().catch(() => ({}));
+
   if (!response.ok) {
     throw new Error(data.detail || "Request failed");
   }
+
   return data;
 }
 
@@ -34,9 +36,12 @@ export function submitPhone(auth_id: string, phone: string) {
 }
 
 export function cancelAuth(auth_id: string) {
-  return request<{ ok: boolean }>(`/auth/cancel/${encodeURIComponent(auth_id)}`, {
-    method: "DELETE",
-  });
+  return request<{ ok: boolean }>(
+    `/auth/cancel/${encodeURIComponent(auth_id)}`,
+    {
+      method: "DELETE",
+    }
+  );
 }
 
 export async function getHealth() {
